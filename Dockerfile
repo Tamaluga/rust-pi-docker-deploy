@@ -1,5 +1,5 @@
 # Build stage
-FROM messense/rust-musl-cross:x86_64-musl AS builder
+FROM rust:1.86 AS builder
 # Set the working directory
 WORKDIR /raspi-deploy-example
 # Copy the entire project
