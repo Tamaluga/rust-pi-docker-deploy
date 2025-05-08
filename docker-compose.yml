@@ -1,0 +1,6 @@
+services:
+  app:
+    image: tamaluga/rust-pi-docker-deploy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile

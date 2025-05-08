@@ -1,0 +1,29 @@
+{
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "editor.formatOnSave": false,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "markdown.validate.enabled": true,
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 180
+    },
+    "[rust]": {
+        "files.trimTrailingWhitespace": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    },
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)|todo!",
+    "rust-analyzer.check.command": "clippy",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+}
