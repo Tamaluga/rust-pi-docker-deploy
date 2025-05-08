@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "raspi-deploy-example"
+name = "rust-pi-docker-deploy"
 version = "0.1.0"
