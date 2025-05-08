@@ -52,6 +52,7 @@ jobs:
         set: |
           *.cache-from=type=gha
           *.cache-to=type=gha,mode=max
+          *.platform=linux/arm/v8
 
   deploy:
     needs: build
@@ -70,17 +71,25 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install sshpass
 
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.RASPI_PRIVATE_SSH_KEY }}" > ~/.ssh/raspi_key
+        chmod 600 ~/.ssh/raspi_key
+
     - name: Copy docker-compose.yml to raspi
-      run: sshpass -v -p '${{ secrets.RASPI_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose.yml daniel@${{ secrets.RASPI_IP }}:~
+      run:  scp -i ~/.ssh/raspi_key -o StrictHostKeyChecking=no docker-compose.yml daniel@${{ secrets.RASPI_IP }}:~
 
     - name: Deploy
-      uses: appleboy/ssh-action@v1
+      uses: appleboy/ssh-action@v0.1.10
       with:
         host: ${{ secrets.RASPI_IP }}
-        username: root
-        password: ${{ secrets.RASPI_PASSWORD }}
+        username: ${{ secrets.RASPI_USER }}
+        key: ${{ secrets.RASPI_PRIVATE_SSH_KEY }}
+        port: 22
+        command_timeout: 30m
         script: |
           cd ~
-          docker-compose down
-          docker-compose pull
-          docker-compose up -d
+          docker compose down
+          docker compose pull
+          docker compose up -d
