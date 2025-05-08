@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "rust-lang.rust-analyzer",
+        "vadimcn.vscode-lldb",
+        "fill-labs.dependi",
+        "tamasfe.even-better-toml",
+        "usernamehw.errorlens",
+        "gruntfuggly.todo-tree",
+        "github.vscode-github-actions",
+        "mhutchie.git-graph",
+        "alefragnani.Bookmarks",
+        "jebbs.plantuml",
+        "peakchen90.open-html-in-browser",
+        "wayou.vscode-todo-highlight",
+        "yzhang.markdown-all-in-one",
+    ]
+}
