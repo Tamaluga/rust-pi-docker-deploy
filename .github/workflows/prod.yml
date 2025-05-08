@@ -71,12 +71,12 @@ jobs:
       run: sudo apt-get install sshpass
 
     - name: Copy docker-compose.yml to raspi
-      run: sshpass -v -p ${{ secrets.RASPI_PASSWORD }} scp -o StrictHostKeyChecking=no docker-compose.yml root@${{ vars.RASPI_IP }}:~
+      run: sshpass -v -p '${{ secrets.RASPI_PASSWORD }}' scp -o StrictHostKeyChecking=no docker-compose.yml daniel@${{ secrets.RASPI_IP }}:~
 
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ vars.RASPI_IP }}
+        host: ${{ secrets.RASPI_IP }}
         username: root
         password: ${{ secrets.RASPI_PASSWORD }}
         script: |
