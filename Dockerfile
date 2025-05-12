@@ -17,7 +17,7 @@ WORKDIR /app
 # Copy the entire project
 COPY . .
 # Build the application
-RUN cargo build $( [ "$BUILD" -eq 1 ] && echo --release ) \
+RUN cargo build $( [ "$BUILD" = "release" ] && echo --release ) \
     --target=aarch64-unknown-linux-musl
 
 # RUN STAGE ---------------------------------------------------------------------

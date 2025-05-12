@@ -55,8 +55,8 @@ Follow the steps in the [Docker post-installation guide](https://docs.docker.com
 To cross-compile your Rust application for the Raspberry Pi:
 
 ```bash
-cross build --target=arm-unknown-linux-gnueabihf
-scp target/arm-unknown-linux-gnueabihf/debug/rust-pi-docker-deploy RASPI_USER@RASPI_IP:~
+cross build --target=aarch64-unknown-linux-musl
+scp target/aarch64-unknown-linux-musl/debug/rust-pi-docker-deploy RASPI_USER@RASPI_IP:~
 ```
 
 ### Build the docker container on the dev host
