@@ -61,6 +61,8 @@ scp target/arm-unknown-linux-gnueabihf/debug/rust-pi-docker-deploy RASPI_USER@RA
 
 ### Build the docker container on the dev host
 
+#### Targeting the Raspi
+
 Build, tag and push the Docker Image on the dev host: 
 ```bash
 docker build --platform linux/arm64 -t rust-pi-docker-deploy .
@@ -71,4 +73,12 @@ docker push DOCKER_USER/rust-pi-docker-deploy:test
 Run the Docker Container on the Raspberry Pi:
 ```bash
 docker run --rm DOCKER_USER/rust-pi-docker-deploy:test
+```
+
+#### Targeting the dev host
+
+Build and run the Docker Image on the dev host: 
+```bash
+docker build --platform linux/amd64 -t rust-pi-docker-deploy .
+docker run --rm rust-pi-docker-deploy
 ```
