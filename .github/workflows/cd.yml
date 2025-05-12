@@ -15,6 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      app_name: ${{ steps.app-info.outputs.APP_NAME }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -64,7 +67,6 @@ jobs:
           *.cache-from=type=gha
           *.cache-to=type=gha,mode=max
           *.context=.
-          *.file=Dockerfile
           *.platform=linux/arm/v8
           *.tags=${{ secrets.DOCKER_USERNAME }}/${{ steps.app-info.outputs.APP_NAME }}:${{ steps.app-info.outputs.APP_VERSION }}
           *.args.BUILD=release
@@ -84,7 +86,7 @@ jobs:
         chmod 600 ~/.ssh/raspi_key
 
     - name: Copy docker-compose.yml to raspi
-      run: scp -i ~/.ssh/raspi_key -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.RASPI_USER }}@${{ secrets.RASPI_IP }}:~
+      run: scp -i ~/.ssh/raspi_key -o StrictHostKeyChecking=no docker-compose.yml ${{ secrets.RASPI_USER }}@${{ secrets.RASPI_IP }}:~/${{ needs.build.outputs.app_name }}/
 
     - name: Deploy
       uses: appleboy/ssh-action@v0.1.10
@@ -95,7 +97,7 @@ jobs:
         port: 22
         command_timeout: 10m
         script: |
-          cd ~
+          cd ~/${{ needs.build.outputs.app_name }}/
           docker compose down
           docker compose pull
           docker compose up -d
